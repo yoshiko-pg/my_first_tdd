@@ -2,8 +2,11 @@ class ClosedRange
 
 	def initialize(min, max)
 		
-		raise ArgumentError, '引数が整数型でない' if min == 'a'
-		raise ArgumentError, '下端点より上端点が小さい' if max < min
+		if min.class.to_s != 'Fixnum' || max.class.to_s != 'Fixnum'
+			raise ArgumentError, '引数が整数型でない'
+		elsif max < min
+	 		raise ArgumentError, '下端点より上端点が小さい'
+	 	end
 
 
 		@min = min

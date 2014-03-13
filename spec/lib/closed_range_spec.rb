@@ -32,30 +32,46 @@ describe '閉区間' do
 	end
 
 
-	context "閉区間の例外" do 
+	context '引数異常の例外' do 
 
-		where(:min, :max) do
-			[
-				[8, 3],
-				[200, 100],
-				[500, 0],
-			]
-		end
+		describe do
+			where(:min, :max) do
+				[
+					[8, 3],
+					[200, 100],
+					[500, 0],
+				]
+			end
 
-		with_them do
-			it "下端点より上端点が小さい場合に例外を投げる" do
-				expect {
-					ClosedRange.new(min, max)
-				}.to raise_error(ArgumentError, '下端点より上端点が小さい')
+			with_them do
+				it "下端点より上端点が小さい場合" do
+					expect {
+						ClosedRange.new(min, max)
+					}.to raise_error(ArgumentError, '下端点より上端点が小さい')
+				end
 			end
 		end
 
-	end
+		describe do
+			where(:min, :max) do
+				[
+					['3', 8],
+					[3, '8'],
+					['a', 'b'],
+					[3.0, 8],
+					[3, ''],
+				]
+			end
 
-	it "下端点もしくは上端点に整数型以外を渡した場合に例外を投げる" do
-			expect {
-				ClosedRange.new('a', 8)
-			}.to raise_error(ArgumentError, '引数が整数型でない')
+			with_them do
+				it "下端点もしくは上端点に整数型以外を渡した場合" do
+					expect {
+						ClosedRange.new(min, max)
+					}.to raise_error(ArgumentError, '引数が整数型でない')
+				end
+			end
+		end
+
 	end
 
 end
