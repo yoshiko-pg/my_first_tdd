@@ -14,15 +14,15 @@ class ClosedRange
 
 	end
 
-	def getLowerEndPoint
+	def lower_end_point
 		@min
 	end
 
-	def getUpperEndPoint
+	def upper_end_point
 		@max
 	end
 
-	def toString
+	def to_s
 		"[#{@min},#{@max}]"
 	end
 
