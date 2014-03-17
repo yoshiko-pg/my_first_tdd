@@ -15,19 +15,19 @@ describe '閉区間' do
 
 	with_them do
 		it "下端点を取得する" do
-			ClosedRange.new(min, max).lower_end_point().should eq min
+			expect(ClosedRange.new(min, max).lower_end_point()).to eq min
 		end
 	end
 
 	with_them do
 		it "上端点を取得する" do
-			ClosedRange.new(min, max).upper_end_point().should eq max
+			expect(ClosedRange.new(min, max).upper_end_point()).to eq max
 		end
 	end
 
 	with_them do
 		it "文字列を取得する" do
-			ClosedRange.new(min, max).to_s().should eq string
+			expect(ClosedRange.new(min, max).to_s()).to eq string
 		end
 	end
 
