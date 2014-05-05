@@ -74,6 +74,20 @@ describe '閉区間' do
 			end
 		end
 
+    describe "閉区間が指定した整数を含むか" do
+      let(:range) { ClosedRange.new(3, 8) }
+      it "指定した整数を含むときtrueを返す" do
+        expect(range.contains(5)).to eq true
+        expect(range.contains(8)).to eq true
+        expect(range.contains(3)).to eq true
+      end
+      it "指定した整数を含まないときfalseを返す" do
+        expect(range.contains(2)).to eq false
+        expect(range.contains(9)).to eq false
+        expect(range.contains(-1)).to eq false
+      end
+    end
+
 	end
 
 end

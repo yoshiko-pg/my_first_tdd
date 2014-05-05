@@ -26,4 +26,12 @@ class ClosedRange
 		"[#{@min},#{@max}]"
 	end
 
+  def contains(num)
+    if num < self.lower_end_point || num > self.upper_end_point
+      false
+    else
+      true
+    end
+  end
+
 end
