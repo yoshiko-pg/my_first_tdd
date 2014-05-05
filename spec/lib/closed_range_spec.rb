@@ -97,14 +97,19 @@ describe '閉区間' do
     end
 
     describe "閉区間が別の閉区間と等しいか判定" do
-      let(:range) { ClosedRange.new(3, 8) }
-      it "等しいときtrueを返す" do
-        expect(range.equals(ClosedRange.new(3, 8))).to eq true
-      end
-      it "異なるときfalseを返す" do
-        expect(range.equals(ClosedRange.new(3, 10))).to eq false
-        expect(range.equals(ClosedRange.new(4, 8))).to eq false
-        expect(range.equals(ClosedRange.new(4, 10))).to eq false
+      with_them do
+        it "等しいときtrueを返す" do
+          expect {
+            ClosedRange.new(min, max).equals(ClosedRange.new(min, max))
+          }.to eq true
+        end
+        it "異なるときfalseを返す" do
+          expect {
+            ClosedRange.new(min, max).equals(ClosedRange.new(min, max+1))
+            ClosedRange.new(min, max).equals(ClosedRange.new(min-1, max))
+            ClosedRange.new(min, max).equals(ClosedRange.new(min-max, min+max))
+          }.to eq false
+        end
       end
     end
 
