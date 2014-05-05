@@ -10,6 +10,7 @@ describe '閉区間' do
 			[0, 500, "[0,500]"],
 			[-5, -3, "[-5,-3]"],
 			[-100, 6, "[-100,6]"],
+      [10, 10, "[10,10]"]
 		]
 	end
 
@@ -75,18 +76,26 @@ describe '閉区間' do
 		end
 
     describe "閉区間が指定した整数を含むか" do
-      let(:range) { ClosedRange.new(3, 8) }
-      it "指定した整数を含むときtrueを返す" do
-        expect(range.contains(5)).to eq true
-        expect(range.contains(8)).to eq true
-        expect(range.contains(3)).to eq true
-      end
-      it "指定した整数を含まないときfalseを返す" do
-        expect(range.contains(2)).to eq false
-        expect(range.contains(9)).to eq false
-        expect(range.contains(-1)).to eq false
+      with_them do
+        it "指定した整数を含むときtrueを返す" do
+          expect {
+            ClosedRange.new(min, max).contains(min)
+            ClosedRange.new(min, max).contains(min + 1)
+            ClosedRange.new(min, max).contains(max)
+            ClosedRange.new(min, max).contains(max - 1)
+            ClosedRange.new(min, max).contains((min+max)/2)
+          }.to eq true
+        end
+        it "指定した整数を含まないときfalseを返す" do
+            expect {
+              ClosedRange.new(min, max).contains(min - 1)
+              ClosedRange.new(min, max).contains(max + 1)
+              ClosedRange.new(min, max).contains(min + max)
+            }.to eq true
+        end
       end
     end
+
 
 	end
 
