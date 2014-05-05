@@ -34,4 +34,12 @@ class ClosedRange
     end
   end
 
+  def equals(other_range)
+    if (self.lower_end_point == other_range.lower_end_point) && (self.upper_end_point == other_range.upper_end_point)
+      true
+    else
+      false
+    end
+  end
+
 end
